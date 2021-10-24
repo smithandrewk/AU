@@ -25,9 +25,11 @@ module testbench ();
 	
 	//Initial block runs at the beginning of simulation
 	initial begin
+		assign ALUop = 2'b00;
+		assign a = 7;
+		assign b = 3;
 		//Apply the input values here, then check results
 		//Mult and div take 32 clock cycles each, so probably delay 33*clock cycle for safety?
 		//Check module 4 slide 41 for testbench structure
-	
 	end
 endmodule
