@@ -15,8 +15,7 @@ module testbench ();
 	logic zero; // The zero flag
 	
 	//Define the AU module
-	//Add parameters
-	AU_32b arith ();
+	AU_32b arith (.a(a),.b(b),.ALUop(ALUop),.clk(clk), .rst_n(rst_n),.s(s),.hi(hi),.lo(lo),.zero(zero));
 	
 	//Simulates clock for testbench
 	always begin
@@ -31,5 +30,4 @@ module testbench ();
 		//Check module 4 slide 41 for testbench structure
 	
 	end
-
 endmodule
