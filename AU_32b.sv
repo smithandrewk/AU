@@ -43,7 +43,13 @@ module AU_32b (input logic [31:0] a,b, // operands
 	*/
 	
 	//Check output value for zero to flip zero flag (True if result is 0)
-
-	//Write tests in the testbench file
-
+	always @(*)
+	begin
+	case(ALUop)
+		2'b00 : begin if (s==0) zero = 1; end // ADD
+		2'b01 : begin if (s==0) zero = 1; end // SUB
+		2'b10 : begin if (hi==0 && lo ==0) zero = 1; end // Mult
+		2'b11 : begin if (hi==0 && lo ==0) zero = 1; end // Div
+	endcase
+	end
 endmodule
