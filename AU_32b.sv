@@ -8,14 +8,24 @@ module AU_32b (input logic [31:0] a,b, // operands
 	output logic zero // The zero flag
 );
 	
-	//Define enable logic
-	//Define ctrl logic
-	
+	logic enabled_mult = 0;
+	logic enabled_div = 0;
+	logic enabled_add_sub = 0;
+	always @(*)
+	begin
+	case(ALUop)
+		2'b00 : enabled_add_sub = 1; // ADD
+		2'b01 : enabled_add_sub = 1; // SUB
+		2'b10 : enabled_mult = 1; // Mult
+		2'b11 : enabled_div = 1; // Div
+	endcase
+	end
+	logic[31:0]hi_mult, lo_mult, hi_div, lo_div;
 	//Defines the function modules
-	//Add parameters
-	cla32b_addsub addsub ();
-	mult_32b_unsigned mult ();
-	div_32b_unsigned div ();
+	// ctrl = ALUop[0]
+	cla32b_addsub addsub (.a(a),.b(b),.clk(clk), .rst_n(rst_n), .cin(cin),.ctrl(ALUop[0]),.enabled(enabled_add_sub),.s(s),.cout(cout));
+	mult_32b_unsigned mult (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_mult),.hi(hi_mult),.lo(lo_mult),.zero(zero));
+	div_32b_unsigned div (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_div),.hi(hi_div),.lo(lo_div),.zero(zero));
 
 	/*Check ALUop: probably always_comb because this is combinational logic
 		If ALUop matches, enable the corresponding module
