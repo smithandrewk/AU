@@ -24,9 +24,15 @@ module AU_32b (input logic [31:0] a,b, // operands
 	//Defines the function modules
 	// ctrl = ALUop[0]
 	cla32b_addsub addsub (.a(a),.b(b),.clk(clk), .rst_n(rst_n), .cin(cin),.ctrl(ALUop[0]),.enabled(enabled_add_sub),.s(s),.cout(cout));
-	mult_32b_unsigned mult (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_mult),.hi(hi_mult),.lo(lo_mult),.zero(zero));
-	div_32b_unsigned div (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_div),.hi(hi_div),.lo(lo_div),.zero(zero));
-
+	mult_32b_unsigned mult (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_mult),.hi(hi_mult),.lo(lo_mult));
+	div_32b_unsigned div (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_div),.hi(hi_div),.lo(lo_div));
+	always @(*)
+	begin
+	case(ALUop)
+		2'b10 : begin hi=hi_mult; lo=lo_mult; end// Mult
+		2'b11 : begin hi=hi_div; lo=lo_div; end// Div
+	endcase
+	end
 	/*Check ALUop: probably always_comb because this is combinational logic
 		If ALUop matches, enable the corresponding module
 		For add/sub, update ctrl with correct value (0 for add, 1 for sub)

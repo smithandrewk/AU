@@ -1,8 +1,7 @@
 module mult_32b_unsigned (input logic [31:0] a,b, // operands
 	input logic clk, rst_n, enabled,
 	output logic [31:0] hi, // The left half of the product/remainder register for multiply/Divide
-	output logic [31:0] lo, // The right half of the product/remainder register for multiply/Divide
-	output logic zero // The zero flag
+	output logic [31:0] lo // The right half of the product/remainder register for multiply/Divide
 );
 
 	integer i = 0;
