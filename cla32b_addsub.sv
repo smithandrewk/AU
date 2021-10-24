@@ -1,11 +1,12 @@
 module cla32b_addsub (input logic [31:0] a,b,
-	input logic cin, ctrl, enabled,
+	input logic clk, rst_n, cin, ctrl, enabled,
 	output logic [31:0] s,
 	output logic cout
 );
 
 	//Wire connects module component cout to the next cin
-	wire [6:0] w;
+	// andrew changed to reg because wire is only allowed in always
+	reg [6:0] w;
 	logic [31:0] result;
 	//8 4-bit components create a 32-bit carry-lookahead adder
 	//Ctrl signal enables addition and subtraction
