@@ -14,10 +14,10 @@ module AU_32b (input logic [31:0] a,b, // operands
 	always @(*)
 	begin
 	case(ALUop)
-		2'b00 : enabled_add_sub = 1; // ADD
-		2'b01 : enabled_add_sub = 1; // SUB
-		2'b10 : enabled_mult = 1; // Mult
-		2'b11 : enabled_div = 1; // Div
+		2'b00 : enabled_add_sub = 1'b1; // ADD
+		2'b01 : enabled_add_sub = 1'b1; // SUB
+		2'b10 : enabled_mult = 1'b1; // Mult
+		2'b11 : enabled_div = 1'b1; // Div
 	endcase
 	end
 	logic[31:0]hi_mult, lo_mult, hi_div, lo_div;
@@ -46,10 +46,10 @@ module AU_32b (input logic [31:0] a,b, // operands
 	always @(*)
 	begin
 	case(ALUop)
-		2'b00 : begin if (s==0) zero = 1; end // ADD
-		2'b01 : begin if (s==0) zero = 1; end // SUB
-		2'b10 : begin if (hi==0 && lo ==0) zero = 1; end // Mult
-		2'b11 : begin if (hi==0 && lo ==0) zero = 1; end // Div
+		2'b00 : begin if (s==0) zero = 1'b1; end // ADD
+		2'b01 : begin if (s==0) zero = 1'b1; end // SUB
+		2'b10 : begin if (hi==0 && lo ==0) zero = 1'b1; end // Mult
+		2'b11 : begin if (hi==0 && lo ==0) zero = 1'b1; end // Div
 	endcase
 	end
 endmodule
