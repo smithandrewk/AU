@@ -23,7 +23,7 @@ module AU_32b (input logic [31:0] a,b, // operands
 	logic[31:0]hi_mult, lo_mult, hi_div, lo_div;
 	//Defines the function modules
 	// ctrl = ALUop[0]
-	cla32b_addsub addsub (.a(a),.b(b),.clk(clk), .rst_n(rst_n), .cin(cin),.ctrl(ALUop[0]),.enabled(enabled_add_sub),.s(s),.cout(cout));
+	cla32b_addsub addsub (.a(a),.b(b),.clk(clk), .rst_n(rst_n), .cin(1'b0),.ctrl(ALUop[0]),.enabled(enabled_add_sub),.s(s),.cout(cout));
 	mult_32b_unsigned mult (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_mult),.hi(hi_mult),.lo(lo_mult));
 	div_32b_unsigned div (.a(a),.b(b),.clk(clk),.rst_n(rst_n),.enabled(enabled_div),.hi(hi_div),.lo(lo_div));
 	always @(*)
